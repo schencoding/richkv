@@ -1,0 +1,8 @@
+create keyspace demo;
+use demo;
+
+create function DeltaMap with placement_strategy='com.hp.hpl.cassandra.DeltaMap';
+create function DeltaAppend with placement_strategy='com.hp.hpl.cassandra.DeltaAppend';
+
+create column family test with delta_function_name=DeltaAppend;
+create column family test1 with delta_function_name=DeltaMap;

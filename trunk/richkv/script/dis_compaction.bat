@@ -1,0 +1,1 @@
+C:/development/workspace-3.5.1jee/cassandra/bin/nodetool.bat -h 127.0.0.1 setcompactionthreshold demo test 0 0 
