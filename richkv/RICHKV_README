@@ -1,0 +1,31 @@
+Richkv
+----------------------
+richkv是在cassandra1.0.6平台的基础上，针对一些大的、复杂数据结构的数据，
+为了减少数据变化(增量/差量)所带来的网络传输的吞吐量。提供了一些新的interface，
+用一个delta value(增量/差量)数据，将数据变化所带来的计算从client转移到server，
+从而提高大数据存储效率。
+
+
+Requirements
+---------------------
+*JAVA >= 1.6
+*Cassandra 1.0.6
+
+
+Getting started
+---------------------
+基本配置详见cassandra的README.txt
+
+richkv为了减少网络数据传输，将一些client端的逻辑计算移植到了server端，
+所以richkv需要在server端自定义一些函数(UDF)来满足业务逻辑的需要。
+
+首先需要注册UDF。
+create function FUNCTION_NAME with placement_strategy='com.hp.hpl.xxx.xxx';
+
+在创建一个新的columnfamily时，提供了一个可选参数delta_function_name，指定一个UDF名称。
+create column family COLUMNFAMILEY_NAME with delta_function_name=FUNCTION_NAME;
+
+
+-------------------------------------------------------------
+在windows OS单个结点的运行和初始化可参考：./script/start.bat.
+-------------------------------------------------------------
